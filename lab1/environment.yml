@@ -1,0 +1,12 @@
+name: ai-lab3
+channels:
+  - defaults
+dependencies:
+  - python=3.13
+  - numpy=2.5.3
+  - pandas=3.0.6
+  - scipy=1.18.1
+  - scikit-learn=1.9.1
+  - matplotlib=3.11.2
+  - joblib
+  - threadpoolctl
