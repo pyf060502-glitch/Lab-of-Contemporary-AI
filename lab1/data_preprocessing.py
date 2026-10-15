@@ -1,5 +1,3 @@
-"""Read original labeled data, group-split it, and clean text without augmentation."""
-
 from __future__ import annotations
 
 import argparse
@@ -94,7 +92,7 @@ def clean_text(text, mode="light"):
             line.split(":", 1)[0].strip().lower()
             for line in lines if ":" in line and not line[:1].isspace()
         ]
-        # Only parse an identifiable mail header. Folded lines inherit their field.
+        
         if separator and sum(field in KNOWN_HEADERS for field in fields) >= 2:
             kept, removing = [], False
             for line in lines:
@@ -118,7 +116,7 @@ def clean_text(text, mode="light"):
 
 
 def duplicate_groups(texts, threshold=0.9):
-    """Fixed shingle signatures for grouping, not a learned classification feature."""
+    
     parent = list(range(len(texts)))
 
     def find(index):
