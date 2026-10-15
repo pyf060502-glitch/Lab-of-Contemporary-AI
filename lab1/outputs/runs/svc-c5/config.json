@@ -1,0 +1,6 @@
+{
+  "model": "svm",
+  "C": 5.0,
+  "seed": 42,
+  "threads": 1
+}

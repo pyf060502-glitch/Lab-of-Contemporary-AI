@@ -1,0 +1,59 @@
+{
+  "status": "success",
+  "selected_epoch": null,
+  "executed_epochs": null,
+  "mbgd_updates": null,
+  "fit_and_monitor_seconds": 29.922126500008744,
+  "solver": "libsvm SVC, one-vs-one training; not MBGD",
+  "support_vectors": 5425,
+  "selection": "SVC fit on training only",
+  "features_sha256": "cdf3245d1a2a342fb484a8a90e63f651666c2761fb9584481784e18fe4cea15a",
+  "model_sha256": "3cc30c82ca12a003e108bb38432645bbba539f7d30df66a39a02aea2e50a964c",
+  "history_sha256": null,
+  "code_sha256": {
+    "data_preprocessing.py": "47755ff24f5dca30b713634895b4051f58f69f255ba07fae1453dd5c6737d658",
+    "evaluate_models.py": "3e977054421ebec6f90737b5dc5850ecbdde3e226fd43f3af739276a64091a76",
+    "plot_results.py": "4c92e3ddd94e0f6f17ad899076fea1fe2c7177439ccd3f7cffb347f9199d9e3c",
+    "test_predict.py": "0f6df2af3736778d2bef7eb979ff6f38eb7a2e50d3b563a10d480572106fdcb1",
+    "tfidf_features.py": "216bf82f761f924e8b517738f526f1bc19dc6041971b51a6bcabd0c8111a84fd",
+    "train_models.py": "7d0a9488f8ba4b42d03e0d00ab5b1a8d7afab4c3fb8453380f833e61be6602f0"
+  },
+  "environment": {
+    "python": "3.13.16 | packaged by Anaconda, Inc. | (main, Oct  1 2026, 20:20:25) [MSC v.1942 64 bit (AMD64)]",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "blas": [
+      {
+        "user_api": "blas",
+        "internal_api": "mkl",
+        "num_threads": 24,
+        "prefix": "mkl_rt",
+        "filepath": "D:\\miniconda\\envs\\ai-lab3\\Library\\bin\\mkl_rt.2.dll",
+        "version": "2025.0-Product",
+        "threading_layer": "intel"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 32,
+        "prefix": "vcomp",
+        "filepath": "D:\\miniconda\\envs\\ai-lab3\\vcomp140.dll",
+        "version": null
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 32,
+        "prefix": "libiomp",
+        "filepath": "D:\\miniconda\\envs\\ai-lab3\\Library\\bin\\libiomp5md.dll",
+        "version": null
+      }
+    ]
+  }
+}

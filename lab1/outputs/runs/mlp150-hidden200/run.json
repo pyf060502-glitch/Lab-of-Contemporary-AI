@@ -1,0 +1,60 @@
+{
+  "status": "success",
+  "selected_epoch": 46,
+  "executed_epochs": 150,
+  "mbgd_updates": 7050,
+  "fit_and_monitor_seconds": 152.6886924999999,
+  "selection": "minimum validation data loss with min_delta; validation never in gradients",
+  "features_sha256": "cdf3245d1a2a342fb484a8a90e63f651666c2761fb9584481784e18fe4cea15a",
+  "model_sha256": "41cee6403bebec47143a94e6bbc72111c1c3b4f18090d936ceb97551776f8734",
+  "history_sha256": "0f81a375632a397f9ed064316d47961f5c73ebcdd3dce22cee5242790672d5e2",
+  "code_sha256": {
+    "data_preprocessing.py": "47755ff24f5dca30b713634895b4051f58f69f255ba07fae1453dd5c6737d658",
+    "evaluate_models.py": "cb012769381a7cf577bd8fec50eb14598e0922560adfa43ca7f491d7d0a7afd6",
+    "plot_results.py": "b051a047751430d414f54841235987d7f98521f4da4a7993db40bf2d3b92c20d",
+    "test_predict.py": "ae8224cacac18aef1a0e24467354bf570ff662941f70949b42f4f0959f3478f3",
+    "tfidf_features.py": "216bf82f761f924e8b517738f526f1bc19dc6041971b51a6bcabd0c8111a84fd",
+    "train_models.py": "66cb76da74a7e619b031780baf3956d96139790bbb84f911097b73e82d9e91fc"
+  },
+  "environment": {
+    "python": "3.13.15 | packaged by Anaconda, Inc. | (main, Aug 14 2026, 17:17:48) [MSC v.1942 64 bit (AMD64)]",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "blas": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 24,
+        "prefix": "libscipy_openblas",
+        "filepath": "D:\\miniconda\\envs\\ai-lab1\\Lib\\site-packages\\numpy.libs\\libscipy_openblas64_-ed4f167a5330424524f45258e7ca2c8d.dll",
+        "version": "0.3.34.106.0",
+        "threading_layer": "pthreads",
+        "architecture": "Haswell"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 32,
+        "prefix": "vcomp",
+        "filepath": "D:\\miniconda\\envs\\ai-lab1\\Lib\\site-packages\\sklearn\\.libs\\vcomp140.dll",
+        "version": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 24,
+        "prefix": "libscipy_openblas",
+        "filepath": "D:\\miniconda\\envs\\ai-lab1\\Lib\\site-packages\\scipy.libs\\libscipy_openblas-197ee2fc9b4d071f7e048078cac74115.dll",
+        "version": "0.3.31.dev",
+        "threading_layer": "pthreads",
+        "architecture": "Haswell"
+      }
+    ]
+  }
+}

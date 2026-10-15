@@ -1,0 +1,16 @@
+{
+  "configuration_source": "mlp150-hidden200",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "validation_accuracy": [
+    0.9240162822252375,
+    0.9226594301221167,
+    0.9192672998643148
+  ],
+  "mean_accuracy": 0.9219810040705564,
+  "sample_std_accuracy": 0.0024460999155115457,
+  "limit": "Same split; initialization and batch-order variation only. Not a new test estimate."
+}

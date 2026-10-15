@@ -1,0 +1,29 @@
+{
+  "config": {
+    "max_features": 5000,
+    "ngram_max": 1,
+    "min_df": 2,
+    "max_df": 1.0,
+    "sublinear_tf": true
+  },
+  "split_sha256": "c129d14097450e5bc638cf94f2b4c0c8251fc5c164c58683278456243848a8a2",
+  "train_shape": [
+    5894,
+    5000
+  ],
+  "validation_shape": [
+    1474,
+    5000
+  ],
+  "train_density": 0.023132473702069903,
+  "train_zero_rows": 0,
+  "validation_zero_rows": 0,
+  "files_sha256": {
+    "train.npz": "5b03a9f109bd86138e474ba34aaad2d094a3024f29c2a8474877d12b26db6275",
+    "validation.npz": "dc61687965645f9e239c9e22931c4ea3c400392497b4218ba47f7ccc51913406",
+    "y_train.npy": "45550e175bac8ee7a4a00109adf3a083bc2bf8796578fcbf5aaeb124507f9e8d",
+    "y_validation.npy": "baf0de6a5e218da7ef94ac93e860638964fc4ff70f951392ec852ea553f8bc7b",
+    "vectorizer.joblib": "2820c7b93586c1ef1aff7bac785b915c7dc01acc08948153740c194ca38c675b"
+  },
+  "fit_scope": "cleaned training originals only; no test or augmentation"
+}

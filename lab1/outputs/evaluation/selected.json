@@ -1,0 +1,22 @@
+{
+  "source_run": "mlp150-hidden200",
+  "model": "mlp",
+  "config": {
+    "epochs": 150,
+    "batch_size": 128,
+    "learning_rate": 1.0,
+    "regularization": 0.0001,
+    "hidden": 200,
+    "seed": 42,
+    "patience": 0,
+    "min_delta": 0.0001
+  },
+  "selected_epoch": 46,
+  "validation_accuracy": 0.9240162822252375,
+  "validation_macro_f1": 0.9239751489165335,
+  "selection_rule": "Fixed split seed candidates only: Accuracy then Macro-F1, then run_id; epoch by validation data loss",
+  "split_sha256": "c129d14097450e5bc638cf94f2b4c0c8251fc5c164c58683278456243848a8a2",
+  "features_sha256": "cdf3245d1a2a342fb484a8a90e63f651666c2761fb9584481784e18fe4cea15a",
+  "model_sha256": "41cee6403bebec47143a94e6bbc72111c1c3b4f18090d936ceb97551776f8734",
+  "mlp_run_prefix": null
+}
