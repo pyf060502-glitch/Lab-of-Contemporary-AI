@@ -1,0 +1,7 @@
+﻿case_id,pair_count,expanded_nodes,time_median_ms,memory_peak_median_kib
+example_7x7,30,331,0.4313,32.2236328125
+pass_through_treasures,30,70,0.1109,20.185546875
+negative_gains,30,240,0.2373,30.748046875
+symmetric_ties,30,100,0.171,20.490234375
+weighted_detour,30,237,0.3436,26.1005859375
+position_updates,30,164,0.2365,22.6474609375

@@ -1,0 +1,1294 @@
+{
+  "format_version": 1,
+  "quiz": "quiz4",
+  "description": "竞争环境下的宝藏分配：题目地图及五个手工规则检查用例。",
+  "primary_case_id": "example_7x7",
+  "coordinate_convention": "从 0 开始的 [row,col]；grid 是二维字符串列表，T1 等标记占一个格子。",
+  "rules": {
+    "movement": "仅上下左右；X 不可通行；进入数字格支付该数字，进入 A/B/T 所在格支付 1。",
+    "initial_cost": "初始位置不收费；目标宝藏格不免费。",
+    "turn_order": [
+      "A",
+      "B",
+      "A",
+      "B"
+    ],
+    "selection": "每次必须选择一个剩余宝藏，净收益为负也可选；只获取选中的宝藏。",
+    "positions": "行动后仅更新当前玩家位置；另一玩家不阻挡寻路。",
+    "terrain": "经过其他宝藏不自动获取；已获取宝藏的格子仍可通行且代价保持为 1。",
+    "gain": "value(Ti) - distance(current_position, Ti)",
+    "utility": "score_a - score_b；A 最大化，B 最小化。",
+    "horizons": [
+      2,
+      4
+    ],
+    "horizon_definition": "H 是单次玩家行动数，H=2 表示双方各一次，H=4 表示双方各两次。",
+    "evaluation": "达到 H 或宝藏取完时，直接使用当前收益差，不估计剩余宝藏。",
+    "mask_bits": {
+      "T1": 0,
+      "T2": 1,
+      "T3": 2,
+      "T4": 3
+    },
+    "default_target_order": [
+      "T1",
+      "T2",
+      "T3",
+      "T4"
+    ],
+    "tie_break": "best_target 取原始编号最小的最优宝藏；optimal_targets 记录全部最优选择。"
+  },
+  "generation": "固定手工地图，无随机抽样；重复生成得到相同数据。",
+  "reference": "距离由独立 Dijkstra 计算，决策由完整递归求值生成；expected 仅用于校验。",
+  "benchmark_notes": [
+    "主实验使用 primary_case_id；其余地图用于规则和正确性检查，可单独评测。",
+    "被测算法应自行使用 A* 构建距离矩阵；参考矩阵不作为输入。",
+    "静态距离矩阵可在同地图各搜索策略间共享，预处理与博弈搜索成本分别记录。",
+    "所有用例的六个特殊位置均两两可达，均有四个宝藏。"
+  ],
+  "case_count": 6,
+  "cases": [
+    {
+      "id": "example_7x7",
+      "kind": "example",
+      "description": "题目主用例：H=2 选 T2、收益差 -1；H=4 选 T3、收益差 3。",
+      "rows": 7,
+      "cols": 7,
+      "seed": null,
+      "grid": [
+        [
+          "A",
+          "1",
+          "1",
+          "X",
+          "2",
+          "1",
+          "T1"
+        ],
+        [
+          "1",
+          "X",
+          "6",
+          "X",
+          "1",
+          "X",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "T2",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "X",
+          "1",
+          "X",
+          "8",
+          "X",
+          "1",
+          "X"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "T3",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "X",
+          "9",
+          "X",
+          "1",
+          "X",
+          "1"
+        ],
+        [
+          "T4",
+          "1",
+          "1",
+          "X",
+          "1",
+          "1",
+          "B"
+        ]
+      ],
+      "players": {
+        "A": {
+          "position": [
+            0,
+            0
+          ],
+          "role": "MAX"
+        },
+        "B": {
+          "position": [
+            6,
+            6
+          ],
+          "role": "MIN"
+        }
+      },
+      "treasures": [
+        {
+          "id": "T1",
+          "position": [
+            0,
+            6
+          ],
+          "value": 9
+        },
+        {
+          "id": "T2",
+          "position": [
+            2,
+            2
+          ],
+          "value": 6
+        },
+        {
+          "id": "T3",
+          "position": [
+            4,
+            4
+          ],
+          "value": 7
+        },
+        {
+          "id": "T4",
+          "position": [
+            6,
+            0
+          ],
+          "value": 7
+        }
+      ],
+      "initial_state": {
+        "pos_a": "A",
+        "pos_b": "B",
+        "remaining": [
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "remaining_mask": 15,
+        "score_a": 0,
+        "score_b": 0,
+        "current_player": "A"
+      },
+      "statistics": {
+        "obstacle_count": 12,
+        "passable_count": 37,
+        "maximum_entry_cost": 9
+      },
+      "expected": {
+        "distance_order": [
+          "A",
+          "B",
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "distance_matrix": [
+          [
+            0,
+            12,
+            10,
+            4,
+            8,
+            8
+          ],
+          [
+            12,
+            0,
+            8,
+            8,
+            4,
+            10
+          ],
+          [
+            10,
+            8,
+            0,
+            6,
+            6,
+            12
+          ],
+          [
+            4,
+            8,
+            6,
+            0,
+            6,
+            6
+          ],
+          [
+            8,
+            4,
+            6,
+            6,
+            0,
+            6
+          ],
+          [
+            8,
+            10,
+            12,
+            6,
+            6,
+            0
+          ]
+        ],
+        "decisions": {
+          "2": {
+            "horizon": 2,
+            "best_target": "T2",
+            "optimal_targets": [
+              "T2"
+            ],
+            "best_value": -1,
+            "first_move_values": {
+              "T1": -4,
+              "T2": -1,
+              "T3": -2,
+              "T4": -4
+            }
+          },
+          "4": {
+            "horizon": 4,
+            "best_target": "T3",
+            "optimal_targets": [
+              "T3"
+            ],
+            "best_value": 3,
+            "first_move_values": {
+              "T1": -5,
+              "T2": 1,
+              "T3": 3,
+              "T4": -7
+            }
+          }
+        },
+        "full_minimax_counts": {
+          "2": {
+            "visited_nodes": 17,
+            "leaf_evaluations": 12
+          },
+          "4": {
+            "visited_nodes": 65,
+            "leaf_evaluations": 24
+          }
+        }
+      }
+    },
+    {
+      "id": "pass_through_treasures",
+      "kind": "pass_through",
+      "description": "单行地图：前往较远宝藏时必经其他宝藏及其位置，但每次只获取选中的一个。",
+      "rows": 1,
+      "cols": 6,
+      "seed": null,
+      "grid": [
+        [
+          "A",
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "B"
+        ]
+      ],
+      "players": {
+        "A": {
+          "position": [
+            0,
+            0
+          ],
+          "role": "MAX"
+        },
+        "B": {
+          "position": [
+            0,
+            5
+          ],
+          "role": "MIN"
+        }
+      },
+      "treasures": [
+        {
+          "id": "T1",
+          "position": [
+            0,
+            1
+          ],
+          "value": 3
+        },
+        {
+          "id": "T2",
+          "position": [
+            0,
+            2
+          ],
+          "value": 5
+        },
+        {
+          "id": "T3",
+          "position": [
+            0,
+            3
+          ],
+          "value": 7
+        },
+        {
+          "id": "T4",
+          "position": [
+            0,
+            4
+          ],
+          "value": 9
+        }
+      ],
+      "initial_state": {
+        "pos_a": "A",
+        "pos_b": "B",
+        "remaining": [
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "remaining_mask": 15,
+        "score_a": 0,
+        "score_b": 0,
+        "current_player": "A"
+      },
+      "statistics": {
+        "obstacle_count": 0,
+        "passable_count": 6,
+        "maximum_entry_cost": 1
+      },
+      "expected": {
+        "distance_order": [
+          "A",
+          "B",
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "distance_matrix": [
+          [
+            0,
+            5,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            5,
+            0,
+            4,
+            3,
+            2,
+            1
+          ],
+          [
+            1,
+            4,
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            3,
+            1,
+            0,
+            1,
+            2
+          ],
+          [
+            3,
+            2,
+            2,
+            1,
+            0,
+            1
+          ],
+          [
+            4,
+            1,
+            3,
+            2,
+            1,
+            0
+          ]
+        ],
+        "decisions": {
+          "2": {
+            "horizon": 2,
+            "best_target": "T4",
+            "optimal_targets": [
+              "T4"
+            ],
+            "best_value": 0,
+            "first_move_values": {
+              "T1": -6,
+              "T2": -5,
+              "T3": -4,
+              "T4": 0
+            }
+          },
+          "4": {
+            "horizon": 4,
+            "best_target": "T4",
+            "optimal_targets": [
+              "T4"
+            ],
+            "best_value": 2,
+            "first_move_values": {
+              "T1": -4,
+              "T2": 1,
+              "T3": 0,
+              "T4": 2
+            }
+          }
+        },
+        "full_minimax_counts": {
+          "2": {
+            "visited_nodes": 17,
+            "leaf_evaluations": 12
+          },
+          "4": {
+            "visited_nodes": 65,
+            "leaf_evaluations": 24
+          }
+        }
+      }
+    },
+    {
+      "id": "negative_gains",
+      "kind": "negative_gains",
+      "description": "宝藏价值均为 1，初始玩家及宝藏间的距离均大于 1；负收益行动仍必须正常执行。",
+      "rows": 1,
+      "cols": 17,
+      "seed": null,
+      "grid": [
+        [
+          "A",
+          "1",
+          "T1",
+          "1",
+          "1",
+          "1",
+          "T2",
+          "1",
+          "1",
+          "1",
+          "T3",
+          "1",
+          "1",
+          "1",
+          "T4",
+          "1",
+          "B"
+        ]
+      ],
+      "players": {
+        "A": {
+          "position": [
+            0,
+            0
+          ],
+          "role": "MAX"
+        },
+        "B": {
+          "position": [
+            0,
+            16
+          ],
+          "role": "MIN"
+        }
+      },
+      "treasures": [
+        {
+          "id": "T1",
+          "position": [
+            0,
+            2
+          ],
+          "value": 1
+        },
+        {
+          "id": "T2",
+          "position": [
+            0,
+            6
+          ],
+          "value": 1
+        },
+        {
+          "id": "T3",
+          "position": [
+            0,
+            10
+          ],
+          "value": 1
+        },
+        {
+          "id": "T4",
+          "position": [
+            0,
+            14
+          ],
+          "value": 1
+        }
+      ],
+      "initial_state": {
+        "pos_a": "A",
+        "pos_b": "B",
+        "remaining": [
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "remaining_mask": 15,
+        "score_a": 0,
+        "score_b": 0,
+        "current_player": "A"
+      },
+      "statistics": {
+        "obstacle_count": 0,
+        "passable_count": 17,
+        "maximum_entry_cost": 1
+      },
+      "expected": {
+        "distance_order": [
+          "A",
+          "B",
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "distance_matrix": [
+          [
+            0,
+            16,
+            2,
+            6,
+            10,
+            14
+          ],
+          [
+            16,
+            0,
+            14,
+            10,
+            6,
+            2
+          ],
+          [
+            2,
+            14,
+            0,
+            4,
+            8,
+            12
+          ],
+          [
+            6,
+            10,
+            4,
+            0,
+            4,
+            8
+          ],
+          [
+            10,
+            6,
+            8,
+            4,
+            0,
+            4
+          ],
+          [
+            14,
+            2,
+            12,
+            8,
+            4,
+            0
+          ]
+        ],
+        "decisions": {
+          "2": {
+            "horizon": 2,
+            "best_target": "T1",
+            "optimal_targets": [
+              "T1"
+            ],
+            "best_value": 0,
+            "first_move_values": {
+              "T1": 0,
+              "T2": -4,
+              "T3": -8,
+              "T4": -8
+            }
+          },
+          "4": {
+            "horizon": 4,
+            "best_target": "T1",
+            "optimal_targets": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "best_value": 0,
+            "first_move_values": {
+              "T1": 0,
+              "T2": 0,
+              "T3": 0,
+              "T4": -8
+            }
+          }
+        },
+        "full_minimax_counts": {
+          "2": {
+            "visited_nodes": 17,
+            "leaf_evaluations": 12
+          },
+          "4": {
+            "visited_nodes": 65,
+            "leaf_evaluations": 24
+          }
+        }
+      }
+    },
+    {
+      "id": "symmetric_ties",
+      "kind": "ties",
+      "description": "上下对称、价值相等，存在并列最优首步；输出应区分唯一选择与最优集合。",
+      "rows": 3,
+      "cols": 3,
+      "seed": null,
+      "grid": [
+        [
+          "T1",
+          "1",
+          "T3"
+        ],
+        [
+          "A",
+          "1",
+          "B"
+        ],
+        [
+          "T2",
+          "1",
+          "T4"
+        ]
+      ],
+      "players": {
+        "A": {
+          "position": [
+            1,
+            0
+          ],
+          "role": "MAX"
+        },
+        "B": {
+          "position": [
+            1,
+            2
+          ],
+          "role": "MIN"
+        }
+      },
+      "treasures": [
+        {
+          "id": "T1",
+          "position": [
+            0,
+            0
+          ],
+          "value": 5
+        },
+        {
+          "id": "T2",
+          "position": [
+            2,
+            0
+          ],
+          "value": 5
+        },
+        {
+          "id": "T3",
+          "position": [
+            0,
+            2
+          ],
+          "value": 5
+        },
+        {
+          "id": "T4",
+          "position": [
+            2,
+            2
+          ],
+          "value": 5
+        }
+      ],
+      "initial_state": {
+        "pos_a": "A",
+        "pos_b": "B",
+        "remaining": [
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "remaining_mask": 15,
+        "score_a": 0,
+        "score_b": 0,
+        "current_player": "A"
+      },
+      "statistics": {
+        "obstacle_count": 0,
+        "passable_count": 9,
+        "maximum_entry_cost": 1
+      },
+      "expected": {
+        "distance_order": [
+          "A",
+          "B",
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "distance_matrix": [
+          [
+            0,
+            2,
+            1,
+            1,
+            3,
+            3
+          ],
+          [
+            2,
+            0,
+            3,
+            3,
+            1,
+            1
+          ],
+          [
+            1,
+            3,
+            0,
+            2,
+            2,
+            4
+          ],
+          [
+            1,
+            3,
+            2,
+            0,
+            4,
+            2
+          ],
+          [
+            3,
+            1,
+            2,
+            4,
+            0,
+            2
+          ],
+          [
+            3,
+            1,
+            4,
+            2,
+            2,
+            0
+          ]
+        ],
+        "decisions": {
+          "2": {
+            "horizon": 2,
+            "best_target": "T1",
+            "optimal_targets": [
+              "T1",
+              "T2"
+            ],
+            "best_value": 0,
+            "first_move_values": {
+              "T1": 0,
+              "T2": 0,
+              "T3": -2,
+              "T4": -2
+            }
+          },
+          "4": {
+            "horizon": 4,
+            "best_target": "T1",
+            "optimal_targets": [
+              "T1",
+              "T2"
+            ],
+            "best_value": 0,
+            "first_move_values": {
+              "T1": 0,
+              "T2": 0,
+              "T3": -2,
+              "T4": -2
+            }
+          }
+        },
+        "full_minimax_counts": {
+          "2": {
+            "visited_nodes": 17,
+            "leaf_evaluations": 12
+          },
+          "4": {
+            "visited_nodes": 65,
+            "leaf_evaluations": 24
+          }
+        }
+      }
+    },
+    {
+      "id": "weighted_detour",
+      "kind": "weighted_detour",
+      "description": "包含权重 8 与障碍，最低代价路径可能绕行；所有特殊格的进入代价仍为 1。",
+      "rows": 5,
+      "cols": 5,
+      "seed": null,
+      "grid": [
+        [
+          "A",
+          "1",
+          "T3",
+          "8",
+          "T1"
+        ],
+        [
+          "1",
+          "X",
+          "1",
+          "X",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "X",
+          "1",
+          "X",
+          "1"
+        ],
+        [
+          "T2",
+          "1",
+          "T4",
+          "1",
+          "B"
+        ]
+      ],
+      "players": {
+        "A": {
+          "position": [
+            0,
+            0
+          ],
+          "role": "MAX"
+        },
+        "B": {
+          "position": [
+            4,
+            4
+          ],
+          "role": "MIN"
+        }
+      },
+      "treasures": [
+        {
+          "id": "T1",
+          "position": [
+            0,
+            4
+          ],
+          "value": 9
+        },
+        {
+          "id": "T2",
+          "position": [
+            4,
+            0
+          ],
+          "value": 7
+        },
+        {
+          "id": "T3",
+          "position": [
+            0,
+            2
+          ],
+          "value": 5
+        },
+        {
+          "id": "T4",
+          "position": [
+            4,
+            2
+          ],
+          "value": 6
+        }
+      ],
+      "initial_state": {
+        "pos_a": "A",
+        "pos_b": "B",
+        "remaining": [
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "remaining_mask": 15,
+        "score_a": 0,
+        "score_b": 0,
+        "current_player": "A"
+      },
+      "statistics": {
+        "obstacle_count": 4,
+        "passable_count": 21,
+        "maximum_entry_cost": 8
+      },
+      "expected": {
+        "distance_order": [
+          "A",
+          "B",
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "distance_matrix": [
+          [
+            0,
+            8,
+            8,
+            4,
+            2,
+            6
+          ],
+          [
+            8,
+            0,
+            4,
+            4,
+            6,
+            2
+          ],
+          [
+            8,
+            4,
+            0,
+            8,
+            6,
+            6
+          ],
+          [
+            4,
+            4,
+            8,
+            0,
+            6,
+            2
+          ],
+          [
+            2,
+            6,
+            6,
+            6,
+            0,
+            4
+          ],
+          [
+            6,
+            2,
+            6,
+            2,
+            4,
+            0
+          ]
+        ],
+        "decisions": {
+          "2": {
+            "horizon": 2,
+            "best_target": "T2",
+            "optimal_targets": [
+              "T2",
+              "T3"
+            ],
+            "best_value": -2,
+            "first_move_values": {
+              "T1": -3,
+              "T2": -2,
+              "T3": -2,
+              "T4": -5
+            }
+          },
+          "4": {
+            "horizon": 4,
+            "best_target": "T4",
+            "optimal_targets": [
+              "T4"
+            ],
+            "best_value": 1,
+            "first_move_values": {
+              "T1": -5,
+              "T2": -1,
+              "T3": -3,
+              "T4": 1
+            }
+          }
+        },
+        "full_minimax_counts": {
+          "2": {
+            "visited_nodes": 17,
+            "leaf_evaluations": 12
+          },
+          "4": {
+            "visited_nodes": 65,
+            "leaf_evaluations": 24
+          }
+        }
+      }
+    },
+    {
+      "id": "position_updates",
+      "kind": "position_updates",
+      "description": "开放矩形地图，宝藏分散：第二次行动必须从该玩家首次选择的宝藏位置出发。",
+      "rows": 3,
+      "cols": 5,
+      "seed": null,
+      "grid": [
+        [
+          "A",
+          "1",
+          "T3",
+          "1",
+          "T1"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "T2",
+          "1",
+          "T4",
+          "1",
+          "B"
+        ]
+      ],
+      "players": {
+        "A": {
+          "position": [
+            0,
+            0
+          ],
+          "role": "MAX"
+        },
+        "B": {
+          "position": [
+            2,
+            4
+          ],
+          "role": "MIN"
+        }
+      },
+      "treasures": [
+        {
+          "id": "T1",
+          "position": [
+            0,
+            4
+          ],
+          "value": 9
+        },
+        {
+          "id": "T2",
+          "position": [
+            2,
+            0
+          ],
+          "value": 7
+        },
+        {
+          "id": "T3",
+          "position": [
+            0,
+            2
+          ],
+          "value": 5
+        },
+        {
+          "id": "T4",
+          "position": [
+            2,
+            2
+          ],
+          "value": 6
+        }
+      ],
+      "initial_state": {
+        "pos_a": "A",
+        "pos_b": "B",
+        "remaining": [
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "remaining_mask": 15,
+        "score_a": 0,
+        "score_b": 0,
+        "current_player": "A"
+      },
+      "statistics": {
+        "obstacle_count": 0,
+        "passable_count": 15,
+        "maximum_entry_cost": 1
+      },
+      "expected": {
+        "distance_order": [
+          "A",
+          "B",
+          "T1",
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "distance_matrix": [
+          [
+            0,
+            6,
+            4,
+            2,
+            2,
+            4
+          ],
+          [
+            6,
+            0,
+            2,
+            4,
+            4,
+            2
+          ],
+          [
+            4,
+            2,
+            0,
+            6,
+            2,
+            4
+          ],
+          [
+            2,
+            4,
+            6,
+            0,
+            4,
+            2
+          ],
+          [
+            2,
+            4,
+            2,
+            4,
+            0,
+            2
+          ],
+          [
+            4,
+            2,
+            4,
+            2,
+            2,
+            0
+          ]
+        ],
+        "decisions": {
+          "2": {
+            "horizon": 2,
+            "best_target": "T1",
+            "optimal_targets": [
+              "T1"
+            ],
+            "best_value": 1,
+            "first_move_values": {
+              "T1": 1,
+              "T2": -2,
+              "T3": -4,
+              "T4": -5
+            }
+          },
+          "4": {
+            "horizon": 4,
+            "best_target": "T1",
+            "optimal_targets": [
+              "T1",
+              "T2",
+              "T3"
+            ],
+            "best_value": -1,
+            "first_move_values": {
+              "T1": -1,
+              "T2": -1,
+              "T3": -1,
+              "T4": -3
+            }
+          }
+        },
+        "full_minimax_counts": {
+          "2": {
+            "visited_nodes": 17,
+            "leaf_evaluations": 12
+          },
+          "4": {
+            "visited_nodes": 65,
+            "leaf_evaluations": 24
+          }
+        }
+      }
+    }
+  ]
+}

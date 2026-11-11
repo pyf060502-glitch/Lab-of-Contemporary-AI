@@ -1,0 +1,7 @@
+name: ai-lab2
+channels:
+  - defaults
+dependencies:
+  - python=3.9.13
+  - matplotlib=3.9
+  - ipykernel=6.29

@@ -1,0 +1,49 @@
+﻿case_id,kind,horizon,algorithm,correct,best_target,best_value,visited_nodes,leaf_evaluations,effective_cutoffs,node_saving_percent,time_median_ms,memory_peak_median_kib
+example_7x7,example,2,Minimax,True,T2,-1,17,12,0,0.0,0.020640000000000002,2.890625
+example_7x7,example,2,AB original,True,T2,-1,13,8,2,23.529411764705888,0.0174905,2.890625
+example_7x7,example,2,AB reverse,True,T2,-1,16,11,1,5.882352941176472,0.020887,2.890625
+example_7x7,example,2,AB gain,True,T2,-1,11,6,3,35.29411764705882,0.018779999999999998,3.0
+example_7x7,example,4,Minimax,True,T3,3,65,24,0,0.0,0.09702400000000001,4.92578125
+example_7x7,example,4,AB original,True,T3,3,47,16,5,27.692307692307693,0.07403699999999999,4.92578125
+example_7x7,example,4,AB reverse,True,T3,3,46,16,4,29.230769230769226,0.0756215,4.953125
+example_7x7,example,4,AB gain,True,T3,3,37,12,6,43.07692307692308,0.0748405,4.92578125
+pass_through_treasures,pass_through,2,Minimax,True,T4,0,17,12,0,0.0,0.0218255,2.91796875
+pass_through_treasures,pass_through,2,AB original,True,T4,0,17,12,0,0.0,0.0223285,2.91796875
+pass_through_treasures,pass_through,2,AB reverse,True,T4,0,11,6,3,35.29411764705882,0.014922,2.890625
+pass_through_treasures,pass_through,2,AB gain,True,T4,0,11,6,3,35.29411764705882,0.018270500000000002,3.01953125
+pass_through_treasures,pass_through,4,Minimax,True,T4,2,65,24,0,0.0,0.091061,4.92578125
+pass_through_treasures,pass_through,4,AB original,True,T4,2,65,24,0,0.0,0.098356,4.92578125
+pass_through_treasures,pass_through,4,AB reverse,True,T4,2,31,10,5,52.3076923076923,0.049734,4.8984375
+pass_through_treasures,pass_through,4,AB gain,True,T4,2,31,10,5,52.3076923076923,0.056300499999999996,4.91796875
+negative_gains,negative_gains,2,Minimax,True,T1,0,17,12,0,0.0,0.0208395,3.0
+negative_gains,negative_gains,2,AB original,True,T1,0,13,8,3,23.529411764705888,0.0187635,2.97265625
+negative_gains,negative_gains,2,AB reverse,True,T1,0,15,10,1,11.764705882352944,0.020193,3.0
+negative_gains,negative_gains,2,AB gain,True,T1,0,11,6,3,35.29411764705882,0.018771,3.07421875
+negative_gains,negative_gains,4,Minimax,True,T1,0,65,24,0,0.0,0.0954425,5.03515625
+negative_gains,negative_gains,4,AB original,True,T1,0,45,16,3,30.76923076923077,0.0690045,5.03515625
+negative_gains,negative_gains,4,AB reverse,True,T3,0,42,14,6,35.38461538461538,0.066412,5.03515625
+negative_gains,negative_gains,4,AB gain,True,T1,0,36,12,5,44.61538461538461,0.06584,5.0078125
+symmetric_ties,ties,2,Minimax,True,T1,0,17,12,0,0.0,0.0218645,2.890625
+symmetric_ties,ties,2,AB original,True,T1,0,12,7,3,29.411764705882348,0.016708,2.890625
+symmetric_ties,ties,2,AB reverse,True,T2,0,13,8,2,23.529411764705888,0.017994,2.890625
+symmetric_ties,ties,2,AB gain,True,T1,0,11,6,3,35.29411764705882,0.018164,3.0
+symmetric_ties,ties,4,Minimax,True,T1,0,65,24,0,0.0,0.089043,4.8984375
+symmetric_ties,ties,4,AB original,True,T1,0,38,13,4,41.53846153846153,0.057362,4.8984375
+symmetric_ties,ties,4,AB reverse,True,T2,0,37,12,6,43.07692307692308,0.056511500000000006,4.8984375
+symmetric_ties,ties,4,AB gain,True,T1,0,31,10,5,52.3076923076923,0.0574045,4.8984375
+weighted_detour,weighted_detour,2,Minimax,True,T2,-2,17,12,0,0.0,0.019636,2.890625
+weighted_detour,weighted_detour,2,AB original,True,T2,-2,13,8,2,23.529411764705888,0.0168175,2.890625
+weighted_detour,weighted_detour,2,AB reverse,True,T3,-2,15,10,1,11.764705882352944,0.019341999999999998,2.890625
+weighted_detour,weighted_detour,2,AB gain,True,T2,-2,11,6,3,35.29411764705882,0.018350500000000002,3.0
+weighted_detour,weighted_detour,4,Minimax,True,T4,1,65,24,0,0.0,0.0960235,4.92578125
+weighted_detour,weighted_detour,4,AB original,True,T4,1,57,20,4,12.307692307692308,0.09003,4.92578125
+weighted_detour,weighted_detour,4,AB reverse,True,T4,1,35,12,3,46.15384615384615,0.054668999999999995,4.92578125
+weighted_detour,weighted_detour,4,AB gain,True,T4,1,44,15,5,32.30769230769231,0.080379,4.8984375
+position_updates,position_updates,2,Minimax,True,T1,1,17,12,0,0.0,0.0207215,2.890625
+position_updates,position_updates,2,AB original,True,T1,1,11,6,3,35.29411764705882,0.0151625,2.890625
+position_updates,position_updates,2,AB reverse,True,T1,1,17,12,0,0.0,0.022002,2.890625
+position_updates,position_updates,2,AB gain,True,T1,1,11,6,3,35.29411764705882,0.0188975,3.01953125
+position_updates,position_updates,4,Minimax,True,T1,-1,65,24,0,0.0,0.091761,4.8984375
+position_updates,position_updates,4,AB original,True,T1,-1,35,12,3,46.15384615384615,0.052024999999999995,4.8984375
+position_updates,position_updates,4,AB reverse,True,T3,-1,51,18,3,21.53846153846154,0.079972,4.8984375
+position_updates,position_updates,4,AB gain,True,T1,-1,31,10,5,52.3076923076923,0.056447500000000005,4.8984375
